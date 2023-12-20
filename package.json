@@ -1,0 +1,20 @@
+{
+  "name": "hito1_2t_front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "node app/api/dist/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "app/*"
+  ],
+  "devDependencies": {
+    "turbo": "^1.11.2"
+  }
+}
