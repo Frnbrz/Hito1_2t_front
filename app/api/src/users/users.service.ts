@@ -21,6 +21,12 @@ export class UsersService {
       user.username,
     );
 
+    const cryptPassword = await this.userRepository.cryptPassword(
+      user.password,
+    );
+
+    user.password = cryptPassword;
+
     return await this.userRepository.insertUser(user);
   }
 
