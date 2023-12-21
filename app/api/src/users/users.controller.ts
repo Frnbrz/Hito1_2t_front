@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -16,12 +17,10 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  // @Get()
-  // getUsers(): Promise<User[]> {
-  //   // return this.usersService.getUsers();
-  //
-  //   return new Promise();
-  // }
+  @Get()
+  getUsers(): Promise<User[]> {
+    return this.usersService.getUsers();
+  }
 
   @Get(':id')
   async getUser(@Param('id', ParseUUIDPipe) id: string): Promise<User> {
@@ -36,6 +35,16 @@ export class UsersController {
     const userFound = await this.usersService.getUser(id);
     if (userFound) {
       return await this.usersService.patchUser(id, user);
+    } else {
+      throw new NotFoundException('Usuario no encontrado');
+    }
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id', ParseUUIDPipe) id: string) {
+    const userFound = await this.usersService.getUser(id);
+    if (userFound) {
+      return await this.usersService.deleteUser(id);
     } else {
       throw new NotFoundException('Usuario no encontrado');
     }
