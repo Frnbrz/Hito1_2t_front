@@ -1,7 +1,7 @@
-import { DataSource } from 'typeorm';
-import { User } from './user.entity';
 import { ConflictException, Injectable } from '@nestjs/common';
+import { DataSource } from 'typeorm';
 import { UserDto } from './dto/create-user.dot';
+import { User } from './user.entity';
 
 @Injectable()
 export class UsersRepository {
@@ -20,6 +20,21 @@ export class UsersRepository {
       .execute();
 
     return newUser.raw[0] as User;
+  }
+
+  async getUsers(): Promise<User[]> {
+    return await this.datasource
+      .createQueryBuilder(User, 'user')
+      .select(['user.id', 'user.username', 'user.email'])
+      .getMany();
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    await this.datasource
+      .createQueryBuilder(User, 'user')
+      .delete()
+      .where('id = :id', { id })
+      .execute();
   }
 
   async updateUser(id: string, user: UserDto): Promise<User> {
