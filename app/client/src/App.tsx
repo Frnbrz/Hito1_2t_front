@@ -2,7 +2,7 @@ function App() {
   return (
     <button
       onClick={async () => {
-        const response = await fetch('/api/v1')
+        const response = await fetch('/api/v1/')
         const data = await response.text()
         console.log(data)
       }}
