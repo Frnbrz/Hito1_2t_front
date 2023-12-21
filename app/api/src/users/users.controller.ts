@@ -1,4 +1,48 @@
-import { Controller } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { UserDto } from './dto/create-user.dot';
+import { User } from './user.entity';
+import { UsersService } from './users.service';
 
 @Controller('users')
-export class UsersController {}
+export class UsersController {
+  constructor(private usersService: UsersService) {}
+
+  // @Get()
+  // getUsers(): Promise<User[]> {
+  //   // return this.usersService.getUsers();
+  //
+  //   return new Promise();
+  // }
+
+  @Get(':id')
+  async getUser(@Param('id', ParseUUIDPipe) id: string): Promise<User> {
+    return await this.usersService.getUser(id);
+  }
+
+  @Patch(':id')
+  async updateUser(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() user: UserDto,
+  ) {
+    const userFound = await this.usersService.getUser(id);
+    if (userFound) {
+      return await this.usersService.patchUser(id, user);
+    } else {
+      throw new NotFoundException('Usuario no encontrado');
+    }
+  }
+
+  @Post()
+  async createUser(@Body() newUser: UserDto): Promise<User> {
+    return await this.usersService.createUser(newUser);
+  }
+}
