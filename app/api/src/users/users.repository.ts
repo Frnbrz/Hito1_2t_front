@@ -1,4 +1,5 @@
 import { ConflictException, Injectable } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import { DataSource } from 'typeorm';
 import { UserDto } from './dto/create-user.dot';
 import { User } from './user.entity';
@@ -20,6 +21,12 @@ export class UsersRepository {
       .execute();
 
     return newUser.raw[0] as User;
+  }
+
+  async cryptPassword(password: string): Promise<string> {
+    const salt = await bcrypt.genSalt(10);
+
+    return await bcrypt.hash(password, salt);
   }
 
   async getUsers(): Promise<User[]> {
