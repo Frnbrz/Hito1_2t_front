@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  db:
+    container_name: pg_container
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: hito_db
+    ports:
+      - "5440:5432"
+
+    volumes:
+      - my-hito-db:/var/lib/postgres/data
+volumes:
+  my-hito-db:
