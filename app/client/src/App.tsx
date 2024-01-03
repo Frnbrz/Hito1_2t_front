@@ -1,15 +1,21 @@
-function App() {
-  return (
-    <button
-      onClick={async () => {
-        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQXXR6qX9UlHQz27QV0XaHCHfklBScja4bXMOV1sOlGVw7HIttXMZWX4VCkykphrAD4SiHZ3Efi4Mne/pub?output=tsv')
+import { useState } from "react"
+import api from "./services/api"
 
-        const text = await response.text()
-        console.log(text.split('\n'))
-      }}
-    >
-      Click me
-    </button>
+interface Bdlist {
+  // Define the properties of Bdlist
+}
+
+function App() {
+  const [bd, setBd] = useState<Bdlist[]>([]) // Update the type of bd and initialize it with an empty array
+  api.bd.list().then(res => {
+      return setBd(res)
+  }
+      
+    )
+  return (
+    <div>
+      {JSON.stringify(bd)}
+   </div>
   )
 }
 export default App
