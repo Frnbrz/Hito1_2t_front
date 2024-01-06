@@ -1,6 +1,10 @@
+
 function hOME() {
   return (
-    <div>hOME</div>
+    <div>
+      <h1>hOME</h1>
+      
+    </div>
   )
 }
 export default hOME
