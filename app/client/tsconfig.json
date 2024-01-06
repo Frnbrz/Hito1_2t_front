@@ -26,7 +26,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/utilities/getValidationsError.tsx"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "extends": "./tsconfig.node.json"
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
