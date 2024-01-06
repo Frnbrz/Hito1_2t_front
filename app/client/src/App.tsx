@@ -1,8 +1,12 @@
-import { Button } from "@/components/ui/button"
+import { ThemeProvider } from "@/components/theme-provider"
+import { Home } from "@/pages/Home.tsx"
 
 function App() {
   return (
-    <Button>Hola</Button>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Home />
+    </ThemeProvider>
   )
 }
+
 export default App
