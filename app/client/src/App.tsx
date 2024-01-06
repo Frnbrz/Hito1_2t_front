@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider"
-import { Home } from "@/pages/Home.tsx"
+import Home from "@/pages/Home.tsx"
 
 function App() {
   return (
