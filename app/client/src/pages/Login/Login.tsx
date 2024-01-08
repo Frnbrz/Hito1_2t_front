@@ -1,27 +1,27 @@
+import { useFields } from '@/hooks'
 import { PrivateRoutes, PublicRoutes, Roles } from '@/models'
-import { createUser, resetUser, UserKey } from '@/redux/states/user'
+import { UserKey, createUser, resetUser } from '@/redux/states/user'
 import { getMorty } from '@/services'
 import { clearLocalStorage } from '@/utilities'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import {
-  createTheme,
-  ThemeProvider,
-  TextField,
-  Typography,
-  Link,
-  Grid,
-  CssBaseline,
-  Container,
-  Button,
-  Box,
   Avatar,
-  Paper
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  Link,
+  Paper,
+  TextField,
+  ThemeProvider,
+  Typography,
+  createTheme
 } from '@mui/material'
 import * as React from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useFields } from '@/hooks'
 
 const theme = createTheme()
 
@@ -40,7 +40,7 @@ export default function SignIn() {
       const result = await getMorty()
       dispatch(createUser({ ...result, rol: Roles.USER }))
       navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true })
-    } catch (error) {}
+    } catch (error) { }
   }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -51,10 +51,10 @@ export default function SignIn() {
     })
   }
 
-  const username = useFields({ type: 'text', name: 'username', label: 'Username' })
+  const username = useFields({ type: 'text', name: 'username', label: 'Usuario' })
   console.log(username.value)
 
-  const password = useFields({ type: 'password', name: 'password', label: 'Password' })
+  const password = useFields({ type: 'password', name: 'password', label: 'Contraseña' })
 
   return (
     <ThemeProvider theme={theme}>
@@ -89,7 +89,7 @@ export default function SignIn() {
         <Container>
           <Grid item>
             <Link href="register" variant="body2">
-              Create an account
+              Crear cuenta
             </Link>
           </Grid>
         </Container>
