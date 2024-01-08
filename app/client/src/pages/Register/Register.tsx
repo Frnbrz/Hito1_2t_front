@@ -16,8 +16,8 @@ function Register() {
     <ThemeProvider theme={theme}>
       <Box display={'flex'} justifyContent={'center'} flexDirection="column" margin={2} gap={1}>
         <Box display={'flex'} alignItems="center" justifyContent={'center'} flexDirection="column">
-          <Typography component="h1" variant="h5">
-            Inicia Sesión
+          <Typography component="h1" variant="h5" sx={{ color: 'black' }}>
+            Registro
           </Typography>
         </Box>
         <Container component={Paper} maxWidth="xs">
@@ -61,7 +61,7 @@ function Register() {
                 autoComplete="current-password"
               />
               <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                Inicia Sesión
+                Registrarse
               </Button>
             </Box>
           </Box>
@@ -69,7 +69,7 @@ function Register() {
         <Container>
           <Grid item>
             <Link href="login" variant="body2">
-              Already have an account? Sign in
+              ¿Ya tienes una cuenta? Inicia Sesión
             </Link>
           </Grid>
         </Container>
