@@ -1,21 +1,42 @@
 import react from '@vitejs/plugin-react'
-import path from 'path'
+import * as path from 'path'
 import { defineConfig } from 'vite'
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  server: {
-    proxy: {
-      '/api/v1': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
+export default defineConfig(configEnv => {
+  const isDevelopment = configEnv.mode === 'development'
+
+  return {
+    plugins: [react()],
+    server: {
+      proxy: {
+        '/api/v1/auth/login': {
+          target: 'http://localhost:5432',
+          changeOrigin: true,
+        },
+        '/api/v1/auth/register': {
+          target: 'http://localhost:5432',
+          changeOrigin: true,
+        },
+        '/api/v1/blog': {
+          target: 'http://localhost:5432',
+          changeOrigin: true,
+        },
       },
     },
-  },
+    test: {
+      globals: true,
+      environment: 'happy-dom',
+      setupFiles: './src/infrastructure/tests.setup.ts',
+    },
+    resolve: {
+      alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+    },
+    css: {
+      modules: {
+        generateScopedName: isDevelopment
+          ? '[name]__[local]__[hash:base64:5]'
+          : '[hash:base64:5]',
+      },
+    },
+  }
 })
