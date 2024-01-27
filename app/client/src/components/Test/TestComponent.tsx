@@ -1,7 +1,7 @@
 
-function TestComponent({ name }: { name: string }) {
+function TestComponent({ name }: { name: string | null }) {
   return (
-    <div>{name.toUpperCase()}</div>
+    <div>{name?.toUpperCase()}</div>
   )
 }
 

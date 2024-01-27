@@ -1,8 +1,8 @@
-import { PublicRoutes } from '@/models'
-import { resetUser, UserKey } from '@/redux/states/user'
-import { clearLocalStorage } from '@/utilities'
+import { PublicRoutes } from 'models'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { resetUser, UserKey } from 'redux/states/user'
+import { clearLocalStorage } from 'utilities'
 
 function Logout() {
   const navigate = useNavigate()

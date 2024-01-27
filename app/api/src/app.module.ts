@@ -1,40 +1,28 @@
-import { Module } from '@nestjs/common';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { join } from 'path';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { LoggingInterceptor } from './commons/loggin.interceptor';
-import { AuthModule } from './auth/auth.module';
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { AuthModule } from './auth/auth.module'
+import { BlogModule } from './blog/blog.module'
+import { CommentModule } from './comment/comment.module'
+import { UsersModule } from './users/users.module'
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../', 'client/dist'),
-    }),
-    UsersModule,
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: 'mysql',
       host: 'localhost',
-      port: 5440,
-      database: 'hito_db',
-      username: 'root',
+      port: 3307,
+      username: 'user_crud',
       password: 'root',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      database: 'db_crud',
+      autoLoadEntities: true,
       synchronize: true,
     }),
+    UsersModule,
     AuthModule,
+    BlogModule,
+    CommentModule,
   ],
-  controllers: [AppController],
-  providers: [
-    AppService,
-
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: LoggingInterceptor,
-    },
-  ],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule { }

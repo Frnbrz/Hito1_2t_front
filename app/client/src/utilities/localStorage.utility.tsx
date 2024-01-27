@@ -1,5 +1,9 @@
 export const persistLocalStorage = <T,>(key: string, value: T) => {
-  localStorage.setItem(key, JSON.stringify({ ...value }))
+  try {
+    localStorage.setItem(key, JSON.stringify({ ...value }))
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 export const clearLocalStorage = (key: string) => {

@@ -1,4 +1,4 @@
-import { TypeWithKey } from '@/models'
+import { TypeWithKey } from 'models'
 
 export const getValidationsError = (errorCode: any) => {
   const codeMatcher: TypeWithKey<string> = {

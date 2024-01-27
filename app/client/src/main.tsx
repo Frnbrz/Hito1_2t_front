@@ -1,7 +1,14 @@
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-import { AxiosInterceptor } from './interceptors/axios.interceptor'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./app/app"
+import "./index.css"
+import { AxiosInterceptor } from "./interceptors"
 
 AxiosInterceptor()
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<App />)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)

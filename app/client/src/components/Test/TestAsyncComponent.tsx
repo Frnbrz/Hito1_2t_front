@@ -13,7 +13,7 @@ const TestAsyncComponent = () => {
       const result = await getNotesError()
       dispatch(fetchNotes(result))
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error as string)
     }
   }
   useEffect(() => {

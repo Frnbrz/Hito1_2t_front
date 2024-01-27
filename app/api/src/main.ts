@@ -1,22 +1,19 @@
-import { NestFactory, Reflector } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
-import * as os from 'os';
+import { ValidationPipe } from '@nestjs/common'
+import { NestFactory } from '@nestjs/core'
+import { AppModule } from './app.module'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('/api/v1');
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-    }),
-  );
-  console.log('Number of threads available: ', os.cpus().length);
-  console.log('Number of threads being used: ', process.env.UV_THREADPOOL_SIZE);
+  const app = await NestFactory.create(AppModule)
 
-  await app.listen(3000);
+
+  app.setGlobalPrefix('api/v1')
+
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true,
+  }))
+
+  await app.listen(5432)
 }
-
-bootstrap();
+bootstrap()

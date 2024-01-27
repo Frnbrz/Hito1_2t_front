@@ -1,32 +1,16 @@
-import { fetchNotes } from '@/redux/states/notes'
-import { AppStore } from '@/redux/store'
-import { getNotes } from '@/services'
-import { Box, Typography } from '@mui/material'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+
+import Logos from '@/components/atoms/logos'
 
 function Dashboard() {
-  const dispatch = useDispatch()
-  const notesState = useSelector((store: AppStore) => store.notes)
 
-  const getNotesFromApi = async () => {
-    try {
-      const result = await getNotes()
-      dispatch(fetchNotes(result))
-    } catch (error) { }
-  }
-  useEffect(() => {
-    getNotesFromApi()
-  }, [])
 
 
   return (
-    <Box>
-      <Typography variant='h2'>Dashboard</Typography>
-      {/* {notesState.notes.map((note: Note) => {
-        return <Typography variant='h3'>{note.content}</Typography>;
-      })} */}
-    </Box>
+    <div className="flex flex-col items-center justify-center h-screen">
+      <Logos.Home className='text-white' />
+      <h2 className="text-2xl font-bold mb-4 text-white">Dashboard</h2>
+    </div>
+
   )
 }
 export default Dashboard

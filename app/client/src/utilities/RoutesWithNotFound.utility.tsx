@@ -1,4 +1,3 @@
-import { Box, Typography } from '@mui/material'
 import { Link, Route, Routes } from 'react-router-dom'
 
 interface Props {
@@ -11,11 +10,14 @@ function RoutesWithNotFound({ children }: Props) {
       <Route
         path="*"
         element={
-          <Box>
-            <Typography variant="h2">Not Found</Typography>
+          <section>
 
-            <Link to={'/'}>Go to home</Link>
-          </Box>
+            <div className="flex flex-col items-center justify-center h-screen">
+              <h2 className="text-2xl font-bold mb-4 text-white">Ruta no encontrada</h2>
+
+              <Link to={'/'} className="text-blue-500 hover:underline">Volver al Inicio</Link>
+            </div>
+          </section>
         }
       />
     </Routes>

@@ -1,40 +1,46 @@
-import { Injectable } from '@nestjs/common';
-import { UserDto } from './dto/create-user.dot';
-import { User } from './user.entity';
-import { UsersRepository } from './users.repository';
+import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
+import { User } from './entities/user.entity'
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepository: UsersRepository) {}
 
-  async getUsers() {
-    return await this.userRepository.getUsers();
+  constructor(
+
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) { }
+
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    return await this.userRepository.save(createUserDto)
   }
 
-  async getUser(id: string) {
-    return await this.userRepository.getUserById(id);
+  async findByEmail(email: string): Promise<User> {
+    return await this.userRepository.findOneBy({ email })
   }
 
-  async createUser(user: UserDto) {
-    await this.userRepository.checKEmailOrUsernameAvailable(
-      user.email,
-      user.username,
-    );
-
-    const cryptPassword = await this.userRepository.cryptPassword(
-      user.password,
-    );
-
-    user.password = cryptPassword;
-
-    return await this.userRepository.insertUser(user);
+  async findbyEmailWithPassword(email: string): Promise<User> {
+    return await this.userRepository.findOne(
+      { where: { email }, select: ['id', 'name', 'email', 'password', 'role'] }
+    )
   }
 
-  async patchUser(id: string, user: UserDto): Promise<User> {
-    return await this.userRepository.updateUser(id, user);
+  async findAll() {
+    return this.userRepository.find()
   }
 
-  async deleteUser(id: string) {
-    return await this.userRepository.deleteUser(id);
+  async findOne(id: number) {
+    return `This action returns a #${id} user`
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    return `This action updates a #${id} user`
+  }
+
+  async remove(id: number) {
+    return `This action removes a #${id} user`
   }
 }

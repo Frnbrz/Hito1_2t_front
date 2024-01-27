@@ -1,33 +1,18 @@
 import { useFields } from '@/hooks'
-import { PrivateRoutes, PublicRoutes, Roles } from '@/models'
+import { PrivateRoutes, PublicRoutes } from '@/models'
 import { UserKey, createUser, resetUser } from '@/redux/states/user'
-import { getMorty } from '@/services'
+import { loginService } from '@/services'
 import { clearLocalStorage } from '@/utilities'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  CssBaseline,
-  Grid,
-  Link,
-  Paper,
-  TextField,
-  ThemeProvider,
-  Typography,
-  createTheme
-} from '@mui/material'
 import * as React from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-const theme = createTheme()
-
 export default function SignIn() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const [error, setError] = React.useState(false)
 
   useEffect(() => {
     clearLocalStorage(UserKey)
@@ -35,65 +20,74 @@ export default function SignIn() {
     navigate(`/${PublicRoutes.LOGIN}`, { replace: true })
   }, [])
 
-  const login = async () => {
-    try {
-      const result = await getMorty()
-      dispatch(createUser({ ...result, rol: Roles.USER }))
-      navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true })
-    } catch (error) { }
-  }
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setError(false)
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
-    })
+
+    try {
+      const result = await loginService({
+        email: data.get('email')?.toString() || '',
+        password: data.get('password')?.toString() || ''
+      })
+
+      dispatch(createUser({ ...result.data }))
+      navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true })
+
+    } catch (e) {
+      setError(true)
+    }
+
+
   }
 
-  const username = useFields({ type: 'text', name: 'username', label: 'Usuario' })
-  console.log(username.value)
+  const email = useFields({ type: 'email', name: 'email', label: 'Email' })
 
-  const password = useFields({ type: 'password', name: 'password', label: 'Contraseña' })
+  const password = useFields({ type: 'password', name: 'password', label: 'Password' })
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box display={'flex'} justifyContent={'center'} flexDirection="column" margin={2} gap={1}>
-        <Box display={'flex'} alignItems="center" justifyContent={'center'} flexDirection="column">
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Inicia Sesión
-          </Typography>
-        </Box>
-        <Container component={Paper} maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              margin: 1
-            }}
-          >
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth {...username} autoFocus />
-              <TextField margin="normal" {...password} required fullWidth autoComplete="current-password" />
-              <Button onClick={login} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                Inicia Sesión
-              </Button>
-            </Box>
-          </Box>
-        </Container>
-        <Container>
-          <Grid item>
-            <Link href="register" variant="body2">
-              Crear cuenta
-            </Link>
-          </Grid>
-        </Container>
-      </Box>
-    </ThemeProvider>
+    <section>
+
+      <div className="flex justify-center items-center flex-col ">
+        <div className="flex items-center justify-center flex-col">
+          <img className="m-1 bg-secondary-main" />
+          <h1 className="text-5xl text-white">Inicia Sesión</h1>
+        </div>
+        <div className="max-w-xs">
+
+          <form onSubmit={handleSubmit} className="mt-1">
+            <label className="text-white">Email</label>
+            <input
+              className="w-full mb-4 p-2 border border-gray-300 rounded"
+              {...email}
+              required
+              autoFocus
+            />
+            <label className="text-white">Password</label>
+            <input
+              className="w-full mb-4 p-2 border border-gray-300 rounded"
+              {...password}
+              required
+              autoComplete="current-password"
+            />
+            {error ? <footer>
+              <p className="text-red-500">Error message goes here</p>
+            </footer> : null}
+            <button
+              className="w-full bg-blue-500 text-white py-2 px-4 rounded mt-6"
+            >
+              Inicia Sesión
+            </button>
+          </form>
+
+        </div>
+        <div>
+          <a href="register" className="text-blue-500">
+            Create an account
+          </a>
+        </div>
+      </div>
+    </section>
   )
 }

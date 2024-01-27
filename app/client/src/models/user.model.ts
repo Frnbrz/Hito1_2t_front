@@ -1,8 +1,12 @@
-import { Roles } from './roles'
 
 export interface UserInfo {
-  id: number
-  name: string
+  name?: string
   email: string
-  rol: Roles
+  password: string
 }
+
+export interface UserState {
+  email: string
+  token: string
+}
+

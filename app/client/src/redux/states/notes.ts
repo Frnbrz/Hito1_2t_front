@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
 import { NoteInfo } from '@/models'
+import { createSlice } from '@reduxjs/toolkit'
 
 export const EmptyUserState: NoteInfo = {
   notes: [],
 }
 
 export const notesSlice = createSlice({
-  name: 'notes',
+  name: 'posts',
   initialState: EmptyUserState,
   reducers: {
     fetchNotes: (state, action) => {
