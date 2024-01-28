@@ -1,8 +1,8 @@
 
 export interface UserInfo {
-  name?: string
+
   email: string
-  password: string
+  token: string
 }
 
 export interface UserState {
