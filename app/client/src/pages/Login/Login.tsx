@@ -59,14 +59,14 @@ export default function SignIn() {
           <form onSubmit={handleSubmit} className="mt-1">
             <label className="text-white">Email</label>
             <input
-              className="w-full mb-4 p-2 border border-gray-300 rounded"
+              className="w-full mb-4 p-2 border border-gray-300 rounded text-black"
               {...email}
               required
               autoFocus
             />
             <label className="text-white">Password</label>
             <input
-              className="w-full mb-4 p-2 border border-gray-300 rounded"
+              className="w-full mb-4 p-2 border border-gray-300 rounded text-black"
               {...password}
               required
               autoComplete="current-password"
