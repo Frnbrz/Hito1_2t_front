@@ -1,11 +1,18 @@
+import Logos from "@/components/atoms/logos"
 import { Blog } from "@/models"
+import { AppStore } from "@/redux/store"
 import { getPost } from "@/services"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import Modal from "../Profile/Modal"
+import PostModalItem from "./PostModalItem"
 
 function Post() {
   const [post, setPost] = useState([])
-
+  const [showModal, setShowModal] = useState(false)
+  const userState = useSelector((store: AppStore) => store.user)
+  const ADMIN = 'admin@dasdas.com'
   useEffect(() => {
     getPost().then((res) => {
       setPost(res.data)
@@ -14,6 +21,15 @@ function Post() {
 
   return (
     <section >
+      {
+        showModal &&
+        <Modal
+          isOpen={showModal}
+          closeModal={() => setShowModal(false)}
+        >
+          <PostModalItem onClose={() => setShowModal(false)} />
+        </Modal>
+      }
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 flex gap-3 flex-col">
 
         {
@@ -21,9 +37,17 @@ function Post() {
             <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
               key={item.id}
             >
-              <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                <Link to={`/post/${item.id}`}>{item.name}</Link>
-              </h2>
+              <header className="mt-2 mb-4 flex justify-between ">
+                <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  <Link to={`/post/${item.id}`}>{item.name}</Link>
+                </h2>
+                {userState.email === ADMIN ?
+                  <button className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" onClick={() => setShowModal(true)}>
+                    <Logos.Delete className="w-6 h-6" />
+                  </button>
+                  : null
+                }
+              </header>
               <p className="mb-5 font-light text-gray-500 dark:text-gray-400">{item.text}</p>
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-4">
@@ -41,8 +65,8 @@ function Post() {
           ))
         }
 
-      </div>
-    </section>
+      </div >
+    </section >
   )
 }
 
