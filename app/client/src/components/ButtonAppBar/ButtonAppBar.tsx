@@ -19,7 +19,10 @@ export default function ButtonAppBar() {
   return (
     <div className="flex justify-between items-center p-4">
       <div className="flex items-center">
-        <Logos.Home className="w-12 h-12 mr-4" />
+        <Link to={`/private/${PrivateRoutes.HOME}`} className="text-white mr-4">
+
+          <Logos.Home className="w-9 h-9 mr-4" />
+        </Link>
       </div>
       {userState.email ? (
         <>
@@ -27,6 +30,14 @@ export default function ButtonAppBar() {
             <Link to={`/private/${PrivateRoutes.HOME}`} className="text-white mr-4">
               {PrivateRoutes.HOME}
             </Link>
+            {
+              userState.email === 'admin@dasdas.com' ?
+                <Link to={`/private/${PrivateRoutes.DASHBOARD}`} className="text-white mr-4">
+                  {PrivateRoutes.DASHBOARD}
+                </Link>
+                : null
+
+            }
             <Link to={`/private/${PrivateRoutes.PROFILE}`} className="text-white mr-4">
               {PrivateRoutes.PROFILE}
             </Link>
@@ -35,7 +46,7 @@ export default function ButtonAppBar() {
             </Link>
           </nav>
           <button
-            className="text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded"
+            className="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center "
             onClick={logOut}
           >
             Logout
