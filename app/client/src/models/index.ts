@@ -1,5 +1,5 @@
 export * from './blog'
-export * from './index'
+export * from './props'
 export * from './roles'
 export * from './routes'
 export * from './type-with-key'

@@ -1,17 +1,17 @@
+import Close from './close'
+import Delete from './delete'
 import Home from './home'
 import Nest from './nest'
 import React from './react'
 
-export interface LogosProps {
-  width?: number | string
-  height?: number | string
-  className?: string
-}
+
 
 const Logos = {
   React,
   Nest,
-  Home
+  Home,
+  Close,
+  Delete
 }
 
 export default Logos

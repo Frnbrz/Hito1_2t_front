@@ -1,3 +1,3 @@
-import Button from "./button";
+export { default as AltButton } from './altButton'
+export { default as DefaultButton } from './defaultButton'
 
-export default Button;
