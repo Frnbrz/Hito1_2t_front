@@ -1,2 +1,5 @@
-export { default as Post } from './Post'
+export * from './Post'
+export * from './PostDelete'
+export * from './PostForm'
+export * from './PostItem'
 

@@ -18,6 +18,7 @@ export default function SignIn() {
     clearLocalStorage(UserKey)
     dispatch(resetUser())
     navigate(`/${PublicRoutes.LOGIN}`, { replace: true })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 

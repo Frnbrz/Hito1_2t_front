@@ -14,7 +14,7 @@ function Register() {
       password,
       name
     }
-    const result = registerService(user)
+    registerService(user)
 
   }
 
