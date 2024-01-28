@@ -1,4 +1,4 @@
-import { LogosProps } from "@/components/atoms/logos/index"
+import { LogosProps } from "@/models"
 
 const Nest = (props: LogosProps): JSX.Element => {
   return (

@@ -1,4 +1,5 @@
-import { LogosProps } from "@/components/atoms/logos/index"
+import { LogosProps } from "@/models"
+
 
 const React = (props: LogosProps): JSX.Element => {
   return (
