@@ -1,23 +1,33 @@
 import Logos from "@/components/atoms/logos"
 import { Blog } from "@/models"
+import { fetchBlog } from "@/redux/states/blog"
 import { AppStore } from "@/redux/store"
 import { getPost } from "@/services"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import Modal from "../Profile/Modal"
-import PostModalItem from "./PostModalItem"
+import PostDelete from "./PostDelete"
+import PostForm from "./PostForm"
 
 function Post() {
-  const [post, setPost] = useState([])
   const [showModal, setShowModal] = useState(false)
+  const [deletePostId, setDeletePostId] = useState(null as null | number)
   const userState = useSelector((store: AppStore) => store.user)
   const ADMIN = 'admin@dasdas.com'
+  const dispatch = useDispatch()
+  const blogState = useSelector((store: AppStore) => store.blog)
+
   useEffect(() => {
     getPost().then((res) => {
-      setPost(res.data)
+      dispatch(fetchBlog(res.data))
     })
   }, [])
+
+  const handleDelete = (id: number) => {
+    setShowModal(true)
+    setDeletePostId(id)
+  }
 
   return (
     <section >
@@ -27,42 +37,51 @@ function Post() {
           isOpen={showModal}
           closeModal={() => setShowModal(false)}
         >
-          <PostModalItem onClose={() => setShowModal(false)} />
+          <PostDelete onClose={() => setShowModal(false)} id={deletePostId} />
         </Modal>
       }
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 flex gap-3 flex-col">
 
-        {
-          post.map((item: Blog) => (
+        {Array.isArray(blogState) && blogState.length > 0 ?
+          blogState.map((blog: Blog) => (
             <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-              key={item.id}
+              key={blog.id}
             >
               <header className="mt-2 mb-4 flex justify-between ">
                 <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <Link to={`/post/${item.id}`}>{item.name}</Link>
+                  <Link to={`/post/${blog.id}`}>{blog.name}</Link>
                 </h2>
                 {userState.email === ADMIN ?
-                  <button className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" onClick={() => setShowModal(true)}>
+                  <button className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" onClick={() => handleDelete(blog.id || 0)}>
                     <Logos.Delete className="w-6 h-6" />
                   </button>
                   : null
                 }
               </header>
-              <p className="mb-5 font-light text-gray-500 dark:text-gray-400">{item.text}</p>
+              <p className="mb-5 font-light text-gray-500 dark:text-gray-400">{blog.text}</p>
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-4">
                   <img className="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
                   <span className="font-medium dark:text-white">
-                    {item.userEmail}
+                    {blog.userEmail}
                   </span>
                 </div>
-                <Link to={`/private/post/${item.id}`} className="inline-flex items-center font-medium text-gray-400 hover:underline">
+                <Link to={`/private/post/${blog.id}`} className="inline-flex items-center font-medium text-gray-400 hover:underline">
                   Read more
                   <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                 </Link>
               </div>
             </article>
           ))
+          :
+          <div className="flex justify-center items-center">
+            <h1 className="text-2xl font-bold">No hay posts</h1>
+          </div>
+        }
+
+        {userState.email === ADMIN ?
+          <PostForm />
+          : null
         }
 
       </div >
