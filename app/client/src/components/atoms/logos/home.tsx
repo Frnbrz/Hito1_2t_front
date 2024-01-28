@@ -1,18 +1,18 @@
-import { LogosProps } from "@/components/atoms/logos/index"
+import { LogosProps } from "@/models"
+
 
 const Home = (props: LogosProps): JSX.Element => {
   return (
 
-
-    <svg width="1em"
-      height="1em"
-      viewBox="0 0 410 404"
+    <svg
+      viewBox="0 0 1024 1024"
       fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}>
-      <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+      height="1em"
+      width="1em"
+      {...props}
+    >
+      <path d="M946.5 505L534.6 93.4a31.93 31.93 0 00-45.2 0L77.5 505c-12 12-18.8 28.3-18.8 45.3 0 35.3 28.7 64 64 64h43.4V908c0 17.7 14.3 32 32 32H448V716h112v224h265.9c17.7 0 32-14.3 32-32V614.3h43.4c17 0 33.3-6.7 45.3-18.8 24.9-25 24.9-65.5-.1-90.5z" />
     </svg>
-
   )
 }
 
