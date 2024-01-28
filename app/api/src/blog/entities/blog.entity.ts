@@ -11,7 +11,7 @@ export class Blog {
   @Column()
   name: string
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'longtext' })
   text: string
 
   @DeleteDateColumn()
