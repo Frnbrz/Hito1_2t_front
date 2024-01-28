@@ -1,5 +1,6 @@
 import Close from './close'
 import Delete from './delete'
+import Edit from './edit'
 import Home from './home'
 import Nest from './nest'
 import React from './react'
@@ -11,7 +12,8 @@ const Logos = {
   Nest,
   Home,
   Close,
-  Delete
+  Delete,
+  Edit
 }
 
 export default Logos

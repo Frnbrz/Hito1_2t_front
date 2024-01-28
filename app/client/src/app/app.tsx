@@ -26,7 +26,7 @@ function App() {
               <ButtonAppBar />
               <ErrorBoundary fallbackComponent={<ErrorPage />}>
                 <RoutesWithNotFound>
-                  <Route path="/" element={<Navigate to={PrivateRoutes.PRIVATE} />} />
+                  <Route path="/" element={<Navigate to={PrivateRoutes.HOME} />} />
                   <Route path={PublicRoutes.LOGIN} element={<Login />} />
                   <Route path={PublicRoutes.REGISTER} element={<Register />} />
                   <Route element={<AuthGuard privateValidation />}>
