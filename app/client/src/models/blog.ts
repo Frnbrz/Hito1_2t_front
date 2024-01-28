@@ -1,6 +1,18 @@
 export interface Blog {
-  id: number
+  id?: number
   name: string
   text: string
-  userEmail: boolean
+  userEmail?: string
+  comments?: Comment[]
+}
+
+export type Blogs = Blog[]
+
+
+export interface Comment {
+  id?: number
+  text: string
+  blogId: number
+  userEmail?: string
+
 }

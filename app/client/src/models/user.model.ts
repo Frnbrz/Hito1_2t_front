@@ -1,8 +1,14 @@
 
 export interface UserInfo {
-
   email: string
   token: string
+}
+
+export interface DecodedToken {
+  role: string
+  email: string
+  iat: number
+  exp: number
 }
 
 export interface UserLogin {
@@ -20,4 +26,5 @@ export interface UserState {
   email: string
   token: string
 }
+
 

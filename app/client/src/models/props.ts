@@ -7,6 +7,7 @@ import {
 
 export interface PostModalItemProps {
   onClose: () => void
+  id: number | null
 }
 
 export interface LogosProps {
