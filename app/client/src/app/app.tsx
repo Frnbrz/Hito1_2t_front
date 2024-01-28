@@ -30,9 +30,9 @@ function App() {
                   <Route path={PublicRoutes.LOGIN} element={<Login />} />
                   <Route path={PublicRoutes.REGISTER} element={<Register />} />
                   <Route element={<AuthGuard privateValidation />}>
-                    <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<Private />} />
+                    <Route path={`/*`} element={<Private />} />
                   </Route>
-                  <Route element={<RoleGuard rol={Roles.ADMIN} />}>
+                  <Route element={<RoleGuard role={Roles.ADMIN} />}>
                     <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
                   </Route>
                 </RoutesWithNotFound>
