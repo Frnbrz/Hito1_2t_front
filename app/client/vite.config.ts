@@ -21,6 +21,10 @@ export default defineConfig(configEnv => {
           target: 'http://localhost:5432',
           changeOrigin: true,
         },
+        '/api/v1/comment': {
+          target: 'http://localhost:5432',
+          changeOrigin: true,
+        },
       },
     },
     test: {
