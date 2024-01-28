@@ -1,4 +1,4 @@
-import { UserInfo } from "@/models"
+import { UserLogin, UserRegister } from "@/models"
 import axios from "axios"
 
 const URLAUTH = '/api/v1/auth/'
@@ -10,7 +10,7 @@ const URL = {
 
 
 
-export const loginService = ({ email, password }: UserInfo) => {
+export const loginService = ({ email, password }: UserLogin) => {
   return axios.post(URL.login, {
     email,
     password
@@ -22,7 +22,7 @@ export const loginService = ({ email, password }: UserInfo) => {
 
 
 
-export const registerService = async ({ email, name, password }: UserInfo) => {
+export const registerService = async ({ email, name, password }: UserRegister) => {
 
   return axios.post(URL.register, {
     email,

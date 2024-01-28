@@ -1,15 +1,18 @@
+import useDecoded from '@/hooks/useDecoded'
 import { PrivateRoutes, Roles } from '@/models'
-import { AppStore } from '@/redux/store'
-import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 
+
 interface Props {
-  rol: Roles
+  role: Roles
 }
 
-function RoleGuard({ rol }: Props) {
-  console.log(rol)
-  const userState = useSelector((store: AppStore) => store.user)
-  return userState.role === rol ? <Outlet /> : <Navigate replace to={PrivateRoutes.HOME} />
+
+
+function RoleGuard({ role }: Props) {
+  const { role: userRole, } = useDecoded()
+
+  return role === userRole ? <Outlet /> : <Navigate to={PrivateRoutes.HOME} />
+
 }
 export default RoleGuard
