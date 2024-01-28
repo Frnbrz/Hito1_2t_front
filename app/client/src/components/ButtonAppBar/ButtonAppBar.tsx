@@ -1,47 +1,51 @@
-import { PrivateRoutes, PublicRoutes } from '@/models'
+import useDecoded from '@/hooks/useDecoded'
+import { PrivateRoutes, PublicRoutes, Roles } from '@/models'
 import { UserKey, resetUser } from '@/redux/states/user'
-import { AppStore } from '@/redux/store'
 import { clearLocalStorage } from '@/utilities'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import Logos from '../atoms/logos'
 
 export default function ButtonAppBar() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const userState = useSelector((store: AppStore) => store.user)
+
+  const { role, email } = useDecoded()
 
   const logOut = () => {
     clearLocalStorage(UserKey)
     dispatch(resetUser())
     navigate(PublicRoutes.LOGIN, { replace: true })
   }
+
+
+
   return (
     <div className="flex justify-between items-center p-4">
       <div className="flex items-center">
-        <Link to={`/private/${PrivateRoutes.HOME}`} className="text-white mr-4">
+        <Link to={PrivateRoutes.HOME} className="text-white mr-4">
 
           <Logos.Home className="w-9 h-9 mr-4" />
         </Link>
       </div>
-      {userState.email ? (
+      {email ? (
         <>
           <nav>
-            <Link to={`/private/${PrivateRoutes.HOME}`} className="text-white mr-4">
+            <Link to={PrivateRoutes.HOME} className="text-white mr-4">
               {PrivateRoutes.HOME}
             </Link>
             {
-              userState.email === 'admin@dasdas.com' ?
-                <Link to={`/private/${PrivateRoutes.DASHBOARD}`} className="text-white mr-4">
+              role === Roles.ADMIN ?
+                <Link to={PrivateRoutes.DASHBOARD} className="text-white mr-4">
                   {PrivateRoutes.DASHBOARD}
                 </Link>
                 : null
 
             }
-            <Link to={`/private/${PrivateRoutes.PROFILE}`} className="text-white mr-4">
+            <Link to={PrivateRoutes.PROFILE} className="text-white mr-4">
               {PrivateRoutes.PROFILE}
             </Link>
-            <Link to={`/private/${PrivateRoutes.POST}`} className="text-white mr-4">
+            <Link to={PrivateRoutes.POST} className="text-white mr-4">
               {PrivateRoutes.POST}
             </Link>
           </nav>

@@ -33,7 +33,7 @@ export default function SignIn() {
       })
 
       dispatch(createUser({ ...result.data }))
-      navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true })
+      navigate(`/${PrivateRoutes.HOME}`, { replace: true })
 
     } catch (e) {
       setError(true)

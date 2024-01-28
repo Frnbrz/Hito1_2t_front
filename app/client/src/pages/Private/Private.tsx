@@ -8,7 +8,6 @@ const Home = lazy(() => import('./Home/Home'))
 const Post = lazy(() => import('./Post/Post'))
 const PostItem = lazy(() => import('./Post/PostItem'))
 const Profile = lazy(() => import('./Profile/Profile'))
-const Dashboard = lazy(() => import('./Dashboard/Dashboard'))
 
 function Private() {
   return (
@@ -18,7 +17,6 @@ function Private() {
       <Route path={PrivateRoutes.POST} element={<Post />} />
       <Route path={PrivateRoutes.PROFILE} element={<Profile />} />
       <Route path={`${PrivateRoutes.POST}/:id`} element={<PostItem />} />
-      <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
     </RoutesWithNotFound>
   )
 }
