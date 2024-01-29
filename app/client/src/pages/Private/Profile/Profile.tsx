@@ -6,7 +6,7 @@ function Profile() {
   const [show, setShow] = useState(false)
 
   return (
-    <>
+    <section className="flex flex-col items-center justify-center h-screen">
       <Modal
         isOpen={show}
         closeModal={() => setShow(false)}
@@ -22,7 +22,7 @@ function Profile() {
       >
         Open Modal
       </button>
-    </>
+    </section>
   )
 }
 export default Profile

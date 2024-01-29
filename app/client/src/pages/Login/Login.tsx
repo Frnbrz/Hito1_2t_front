@@ -73,7 +73,7 @@ export default function SignIn() {
               autoComplete="current-password"
             />
             {error ? <footer>
-              <p className="text-red-500">Error message goes here</p>
+              <p className="text-red-500 text-center">Error</p>
             </footer> : null}
             <button
               className="w-full bg-blue-500 text-white py-2 px-4 rounded mt-6"
@@ -85,7 +85,7 @@ export default function SignIn() {
         </div>
         <div>
           <a href="register" className="text-blue-500">
-            Create an account
+            Crear una cuenta
           </a>
         </div>
       </div>

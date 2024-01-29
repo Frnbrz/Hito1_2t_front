@@ -8,7 +8,7 @@ function Dashboard() {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <Logos.Home className='text-white' />
-      <h2 className="text-2xl font-bold mb-4 text-white">Dashboard</h2>
+      <h2 className="text-2xl font-bold mb-4 text-white">Hola Admin</h2>
     </div>
 
   )
