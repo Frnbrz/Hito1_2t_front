@@ -16,7 +16,7 @@ La instalacion de node modules se hace de forma global gracias a la ayuda de `Tu
 Instalacion de `node_modules`
 
 ```
-npm install
+yarn install
 ```
 
 Dentro de `package.json` fuera de ambos repos estan los scripts que se ejecutan a la vez en ambos lados
@@ -24,17 +24,17 @@ Dentro de `package.json` fuera de ambos repos estan los scripts que se ejecutan 
 Ejecucion en desarollo 
 
 ```
-npm run dev
+yarn dev
 ```
 
 Build de front y back
 
 ```
-npm run build
+yarn build
 ```
 
 Ejecucion de aplicacion en produccion gracias a `@nestjs/serve-static`
 
 ```
-npm run start
+yarn start
 ```
