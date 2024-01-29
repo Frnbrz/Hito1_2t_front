@@ -36,5 +36,5 @@ yarn build
 Ejecucion de aplicacion en produccion gracias a `@nestjs/serve-static`
 
 ```
-npm run start
+yarn start
 ```
