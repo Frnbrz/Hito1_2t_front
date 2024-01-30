@@ -36,7 +36,7 @@ function CommentDelete({ onClose, id }: PostModalItemProps) {
 
 
   return (
-    <form className="max-w-sm mx-auto" onSubmit={(event) => handleDelete(event)}>
+    <form className="max-w-sm mx-auto m-5" onSubmit={(event) => handleDelete(event)}>
       <div className="mb-5">
 
         <p>
@@ -46,11 +46,11 @@ function CommentDelete({ onClose, id }: PostModalItemProps) {
       </div>
       <div className="flex justify-between">
 
-        <DefaultButton
+        <AltButton
           onClick={handleClose}
-        >Cancelar</DefaultButton>
+        >Cancelar</AltButton>
 
-        <AltButton>Borrar</AltButton>
+        <DefaultButton>Borrar</DefaultButton>
       </div>
     </form>
 
