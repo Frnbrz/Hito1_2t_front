@@ -9,19 +9,7 @@ export default defineConfig(configEnv => {
     plugins: [react()],
     server: {
       proxy: {
-        '/api/v1/auth/login': {
-          target: 'http://localhost:5432',
-          changeOrigin: true,
-        },
-        '/api/v1/auth/register': {
-          target: 'http://localhost:5432',
-          changeOrigin: true,
-        },
-        '/api/v1/blog': {
-          target: 'http://localhost:5432',
-          changeOrigin: true,
-        },
-        '/api/v1/comment': {
+        '/api/v1': {
           target: 'http://localhost:5432',
           changeOrigin: true,
         },
