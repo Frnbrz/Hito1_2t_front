@@ -12,7 +12,7 @@ export const postComment = ({ text, blogId }: Comment) => {
 }
 
 export const updateComment = ({ id, text }: Comment) => {
-  return axios.put(URLAUTH + '/' + id, {
+  return axios.patch(URLAUTH + '/' + id, {
     text
   })
 }
