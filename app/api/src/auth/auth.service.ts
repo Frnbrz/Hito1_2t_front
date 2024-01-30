@@ -44,9 +44,10 @@ export class AuthService {
       email,
       password: cryptPassword,
     })
+    const token = await this.jwtService.signAsync({ email, role: 'user' })
 
     return {
-      name,
+      token,
       email,
     }
 
