@@ -15,7 +15,9 @@ function CommentUpdate({ onClose, id }: PostModalItemProps) {
   const dispatch = useDispatch()
   const { id: idBlog } = useParams()
   const FormSchema = z.object({
-    text: z.string().min(2).max(100),
+    text: z.string({
+      errorMap: () => ({ message: 'El comentario debe tener entre 2 y 100 caracteres' }),
+    }).min(2).max(100),
     root: z.string().optional()
   })
 
@@ -39,7 +41,7 @@ function CommentUpdate({ onClose, id }: PostModalItemProps) {
     console.log(data)
     try {
       await updateComment({
-        id: Number(id) || 0,
+        id: id || 0,
         text: data.text || '',
       })
       await getPostById(Number(idBlog)).then((res) => {

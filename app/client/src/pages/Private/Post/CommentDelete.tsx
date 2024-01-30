@@ -37,9 +37,9 @@ function CommentDelete({ onClose, id }: PostModalItemProps) {
 
   return (
     <form className="max-w-sm mx-auto m-5" onSubmit={(event) => handleDelete(event)}>
-      <div className="mb-5">
+      <div className="m-5 p-4">
 
-        <p>
+        <p className="text-center text-white">
           ¿Estás seguro que deseas eliminar este comentario?
         </p>
 
