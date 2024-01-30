@@ -14,8 +14,7 @@ import PostForm from "./PostForm"
 function Post() {
   const [showModal, setShowModal] = useState(false)
   const [deletePostId, setDeletePostId] = useState(null as null | number)
-  const userState = useSelector((store: AppStore) => store.user)
-  const ADMIN = 'admin@dasdas.com'
+
   const dispatch = useDispatch()
   const blogState = useSelector((store: AppStore) => store.blog)
   const { role } = useDecoded()
