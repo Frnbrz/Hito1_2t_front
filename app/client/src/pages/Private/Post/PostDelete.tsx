@@ -30,9 +30,9 @@ function PostDelete({ onClose, id }: PostModalItemProps) {
 
   return (
     <form className="max-w-sm mx-auto" onSubmit={handleDelete}>
-      <div className="mb-5">
+      <div className="m-5 p-4">
 
-        <p>
+        <p className="text-center text-white">
           ¿Estás seguro que deseas eliminar este post?
         </p>
 
