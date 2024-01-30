@@ -12,7 +12,7 @@ export type Blogs = Blog[]
 export interface Comment {
   id?: number
   text: string
-  blogId: number
+  blogId?: number
   userEmail?: string
 
 }
