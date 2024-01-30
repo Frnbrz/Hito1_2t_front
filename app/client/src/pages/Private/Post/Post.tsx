@@ -45,7 +45,7 @@ function Post() {
 
       {Array.isArray(blogState) && blogState.length > 0 ?
         blogState.map((blog: Blog) => (
-          <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+          <article className="p-6  rounded-lg border  shadow-md bg-gray-800 border-gray-700"
             key={blog.id}
           >
             <header className="mt-2 mb-4 flex justify-between " key={blog.id}>
@@ -53,17 +53,17 @@ function Post() {
                 <Link to={`/post/${blog.id}`}>{blog.name}</Link>
               </h2>
               {role === Roles.ADMIN ?
-                <button className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" onClick={() => handleDelete(blog.id || 0)}>
+                <button className="mb-2 text-2xl font-bold tracking-tight text-white " onClick={() => handleDelete(blog.id || 0)}>
                   <Logos.Delete className="w-6 h-6" />
                 </button>
                 : null
               }
             </header>
-            <p className="mb-5 font-light text-gray-500 dark:text-gray-400 truncate">{blog.text}</p>
+            <p className="mb-5 font-light text-gray-400  truncate">{blog.text}</p>
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-4">
                 <img className="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
-                <span className="font-medium text-black">
+                <span className="font-medium text-white">
                   {blog.userEmail}
                 </span>
               </div>
