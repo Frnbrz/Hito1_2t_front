@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { ActiveUser } from 'src/common/decorators/active-user.decoraator'
 import { Role } from 'src/common/enums/rol.enum'
 import { UserActiveInterface } from 'src/common/interfaces/user-active.interface'
@@ -16,7 +17,7 @@ interface RequestWithUser extends Request {
     role: string
   }
 }
-
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
 
