@@ -1,3 +1,4 @@
+import { DefaultButton } from '@/components/atoms/button'
 import { useFields } from '@/hooks'
 import { PrivateRoutes, PublicRoutes } from '@/models'
 import { UserKey, createUser, resetUser } from '@/redux/states/user'
@@ -48,45 +49,33 @@ export default function SignIn() {
   const password = useFields({ type: 'password', name: 'password', label: 'Password' })
 
   return (
-    <section>
 
-      <div className="flex justify-center items-center flex-col ">
-        <div className="flex items-center justify-center flex-col">
-          <img className="m-1 bg-secondary-main" />
-          <h1 className="text-5xl text-white">Inicia Sesión</h1>
-        </div>
-        <div className="max-w-xs">
+    <section className="">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 
-          <form onSubmit={handleSubmit} className="mt-1">
-            <label className="text-white">Email</label>
-            <input
-              className="w-full mb-4 p-2 border border-gray-300 rounded text-black"
-              {...email}
-              required
-              autoFocus
-            />
-            <label className="text-white">Password</label>
-            <input
-              className="w-full mb-4 p-2 border border-gray-300 rounded text-black"
-              {...password}
-              required
-              autoComplete="current-password"
-            />
-            {error ? <footer>
-              <p className="text-red-500 text-center">Error</p>
-            </footer> : null}
-            <button
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded mt-6"
-            >
-              Inicia Sesión
-            </button>
-          </form>
+        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Login
+            </h1>
+            <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                <input  {...email} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required />
+              </div>
+              <div>
+                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                <input {...password} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+              </div>
 
-        </div>
-        <div>
-          <a href="register" className="text-blue-500">
-            Crear una cuenta
-          </a>
+              {error ? <p className="text-sm font-medium text-red-600">Credenciales incorrectas</p> : null}
+
+              <DefaultButton>Sign in</DefaultButton>
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                Crear una cuenta <a href="register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Registrarte</a>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </section>
