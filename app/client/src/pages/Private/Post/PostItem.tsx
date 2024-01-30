@@ -1,5 +1,6 @@
 import { DefaultButton } from '@/components/atoms/button'
 import Logos from '@/components/atoms/logos'
+import useDecoded from '@/hooks/useDecoded'
 import { Comment } from '@/models'
 import { fetchBlogById } from '@/redux/states/blogById'
 import { AppStore } from '@/redux/store'
@@ -17,8 +18,9 @@ function PostItem() {
   const [deleteCommentId, setDeleteCommentId] = useState(null as null | number)
   const blogByIdState = useSelector((store: AppStore) => store.blogById)
   const navigate = useNavigate()
-
   const dispatch = useDispatch()
+  const { email } = useDecoded()
+
 
   useEffect(() => {
     getPostById(Number(id)).then((res) => {
@@ -124,14 +126,16 @@ function PostItem() {
                       <p className="text-sm text-gray-600 dark:text-gray-400"><time
                         title="February 8th, 2022">Feb. 8, 2022</time></p>
                     </div>
-                    <div className='flex gap-3'>
-                      <button className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" onClick={() => handleDelete(item.id!)}>
-                        <Logos.Delete className="w-6 h-6" />
-                      </button>
-                      <button className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" onClick={() => handleUpdate(item.id!)}>
-                        <Logos.Edit className="w-6 h-6" />
-                      </button>
-                    </div>
+                    {email === item.userEmail ?
+                      <div className='flex gap-3'>
+                        <button className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" onClick={() => handleDelete(item.id!)}>
+                          <Logos.Delete className="w-6 h-6" />
+                        </button>
+                        <button className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" onClick={() => handleUpdate(item.id!)}>
+                          <Logos.Edit className="w-6 h-6" />
+                        </button>
+                      </div> : null
+                    }
                   </footer>
                   <p className="text-gray-500 dark:text-gray-400">{item.text}</p>
                 </article>
