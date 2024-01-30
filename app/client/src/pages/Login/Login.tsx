@@ -1,19 +1,38 @@
-import { DefaultButton } from '@/components/atoms/button'
-import { useFields } from '@/hooks'
 import { PrivateRoutes, PublicRoutes } from '@/models'
 import { UserKey, createUser, resetUser } from '@/redux/states/user'
 import { loginService } from '@/services'
 import { clearLocalStorage } from '@/utilities'
-import * as React from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { motion } from "framer-motion"
 import { useEffect } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { z } from 'zod'
 
-export default function SignIn() {
+
+const FormSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(2).max(100),
+  root: z.string().optional()
+})
+
+type FormSchemaType = z.infer<typeof FormSchema>
+
+function SignIn() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [error, setError] = React.useState(false)
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<FormSchemaType>({
+    resolver: zodResolver(FormSchema),
+  })
+
+
 
   useEffect(() => {
     clearLocalStorage(UserKey)
@@ -22,62 +41,95 @@ export default function SignIn() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setError(false)
-    const data = new FormData(event.currentTarget)
-
+  const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
+    console.log(data)
     try {
       const result = await loginService({
-        email: data.get('email')?.toString() || '',
-        password: data.get('password')?.toString() || ''
+        email: data.email || '',
+        password: data.password || ''
       })
 
       dispatch(createUser({ ...result.data }))
       navigate(`/${PrivateRoutes.HOME}`, { replace: true })
 
-    } catch (e) {
-      setError(true)
+    } catch (error) {
+      setError('root', {
+        type: 'manual',
+        message: 'Credenciales incorrectas'
+      })
     }
-
-
   }
 
-  const email = useFields({ type: 'email', name: 'email', label: 'Email' })
-
-  const password = useFields({ type: 'password', name: 'password', label: 'Password' })
-
   return (
-
-    <section className="">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Login
-            </h1>
-            <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                <input  {...email} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required />
+    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+          {errors.root && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+            >
+              <div className="bg-red-50 p-2.5 rounded-lg">
+                <p className="text-sm text-red-600">{errors.root.message}</p>
               </div>
-              <div>
-                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                <input {...password} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-              </div>
+            </motion.div>
+          )}
+          <h1 className="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white text-center">
+            Login
+          </h1>
+          <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+              <input
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required
+                {...register("email")}
+                disabled={isSubmitting}
+              />
+              {errors.email && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                >
+                  <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
+                </motion.div>
+              )}
+            </div>
+            <div>
+              <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+              <input
+                type="password"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required
+                {...register("password")}
+                disabled={isSubmitting}
+              />
 
-              {error ? <p className="text-sm font-medium text-red-600">Credenciales incorrectas</p> : null}
+              {errors.password && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                >
+                  <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>
+                </motion.div>
+              )}
+            </div>
 
-              <DefaultButton>Sign in</DefaultButton>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Crear una cuenta <a href="register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Registrarte</a>
-              </p>
-            </form>
-          </div>
+            <button
+              type="submit"
+              className="w-full px-8 py-4 flex items-center justify-center uppercase text-white font-semibold bg-blue-600 rounded-lg disabled:bg-gray-100 disabled:text-gray-400"
+              disabled={isSubmitting}
+            >
+              Acceder
+            </button>
+            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+              Crear una cuenta <a href="register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Registrarte</a>
+            </p>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
+
+
+export default SignIn
