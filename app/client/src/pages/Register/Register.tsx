@@ -10,9 +10,19 @@ import { z } from 'zod'
 
 
 const FormSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(2).max(100),
-  name: z.string().min(2).max(100),
+  email: z.string({
+    description: 'El email debe ser válido'
+  }).email(
+    {
+      message: 'El email debe ser válido'
+    }
+  ),
+  password: z.string({
+    errorMap: () => ({ message: 'La contraseña debe tener entre 2 y 20 caracteres' }),
+  }).min(2).max(20),
+  name: z.string({
+    errorMap: () => ({ message: 'El nombre debe tener entre 2 y 100 caracteres' }),
+  }).min(2).max(100),
   root: z.string().optional()
 })
 
