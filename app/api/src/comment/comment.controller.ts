@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { Roles } from 'src/auth/decorators/roles.decorators'
 import { AuthGuard } from 'src/auth/guard/auth.guard'
 import { RolesGuard } from 'src/auth/guard/roles.guard'
@@ -9,6 +10,9 @@ import { CommentService } from './comment.service'
 import { CreateCommentDto } from './dto/create-comment.dto'
 import { UpdateCommentDto } from './dto/update-comment.dto'
 
+
+@ApiBearerAuth()
+@ApiTags('comment')
 @Controller('comment')
 @Roles(Role.USER)
 @UseGuards(AuthGuard, RolesGuard)
