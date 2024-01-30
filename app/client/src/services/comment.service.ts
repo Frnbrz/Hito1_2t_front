@@ -12,12 +12,12 @@ export const postComment = ({ text, blogId }: Comment) => {
 }
 
 export const updateComment = ({ id, text }: Comment) => {
-  return axios.patch(URLAUTH + '/' + id, {
+  return axios.patch(`${URLAUTH}/${id}`, {
     text
   })
 }
 
 export const deleteComment = (id: number) => {
-  return axios.delete(URLAUTH + '/' + id)
+  return axios.delete(`${URLAUTH}/${id}`)
 }
 
