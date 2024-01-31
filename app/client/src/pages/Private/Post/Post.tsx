@@ -62,7 +62,8 @@ function Post() {
             <p className="mb-5 font-light text-gray-400  truncate">{blog.text}</p>
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-4">
-                <img className="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
+                <img className="w-7 h-7 rounded-full" src="https://api.lorem.space/image/face?w=150&h=150
+" alt="Jese Leos avatar" />
                 <span className="font-medium text-white">
                   {blog.userEmail}
                 </span>
