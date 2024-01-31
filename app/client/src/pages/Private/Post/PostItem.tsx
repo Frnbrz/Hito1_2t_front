@@ -98,7 +98,8 @@ function PostItem() {
           <p className="mb-5 font-light  text-gray-300">{blogByIdState.text}</p>
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
-              <img className="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
+              <img className="w-7 h-7 rounded-full" src="https://api.lorem.space/image/face?w=150&h=150
+" alt="Jese Leos avatar" />
               <span className="font-medium text-white">
                 {blogByIdState.userEmail}
               </span>
@@ -117,7 +118,7 @@ function PostItem() {
                 <textarea id="comment"
                   name='comment'
                   className="px-0 w-full text-sm  border-0 focus:ring-0 focus:outline-none text-white placeholder-gray-400 bg-gray-800"
-                  placeholder="Write a comment..." required></textarea>
+                  placeholder="Escribe un comentario..." required></textarea>
               </div>
               <DefaultButton>
                 Añade un comentario
@@ -130,7 +131,8 @@ function PostItem() {
                     <div className="flex items-center">
                       <p className="inline-flex items-center mr-3 text-sm text-white font-semibold"><img
                         className="mr-2 w-6 h-6 rounded-full"
-                        src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                        src="https://api.lorem.space/image/face?w=150&h=150
+"
                         alt="Michael Gough" />{item.userEmail}</p>
                       <p className="text-sm text-gray-400"><time
                         title="February 8th, 2022">Feb. 8, 2022</time></p>
@@ -146,7 +148,7 @@ function PostItem() {
                       </div> : null
                     }
                   </footer>
-                  <p className="text-gray-500 dark:text-gray-400">{item.text}</p>
+                  <p className="text-gray-400">{item.text}</p>
                 </article>
               )
                 : null}
