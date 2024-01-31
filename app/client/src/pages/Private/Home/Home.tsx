@@ -22,9 +22,9 @@ function Home() {
         </div>
       </header>
 
-      <section className="h-[calc(100vh-580px)]">
+      <section className="h-[calc(100vh-880px)] sm:h-[calc(100vh-680px)]">
         <div className="bg-transparent text-center">
-          <h1 className="mt-2 mb-16 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl text-purple-200">
+          <h1 className="mt-2 mb-16 font-bold tracking-tight text-purple-200 text-lg sm:text-xl md:text-3xl lg:text-5xl xl:text-8xl">
             El mejor Blog <br /><span className="text-primary">del mundo</span>
           </h1>
         </div>
