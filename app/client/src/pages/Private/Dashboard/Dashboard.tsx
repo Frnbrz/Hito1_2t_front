@@ -18,12 +18,12 @@ function Dashboard() {
   }, [])
   return (
     <>
-      <div className="flex flex-col w-4/5 m-auto">
+      <div className="flex flex-col w-4/5 m-auto ">
         <div className="overflow-x-auto">
           <div className="align-middle inline-block min-w-full">
             <div className="shadow overflow-hidden">
-              <table className="table-fixed min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-100">
+              <table className="table-fixed min-w-full divide-y divide-gray-200 ">
+                <thead className="bg-gray-800">
                   <tr>
                     <th scope="col" className="p-4">
                       <div className="flex items-center">
@@ -31,19 +31,19 @@ function Dashboard() {
                         <label htmlFor="checkbox-all" className="sr-only">checkbox</label>
                       </div>
                     </th>
-                    <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th scope="col" className="p-4 text-left text-xs font-medium text-gray-100 uppercase ">
                       Name
                     </th>
-                    <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th scope="col" className="p-4 text-left text-xs font-medium text-gray-100 uppercase">
                       Status
                     </th>
                     <th scope="col" className="p-4">
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-gray-600 divide-y divide-gray-200">
                   {users.map((user: User) => (
-                    <tr className="hover:bg-gray-100" key={user.id}>
+                    <tr className="hover:bg-gray-900" key={user.id}>
                       <td className="p-4 w-4">
                         <div className="flex items-center">
                           <input id="checkbox-20" aria-describedby="checkbox-1" type="checkbox" className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded" />
@@ -53,14 +53,15 @@ function Dashboard() {
                       <td className="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
                         <img className="h-10 w-10 rounded-full" src="https://demo.themesberg.com/windster/images/users/robert-brown.png" alt="Robert Brown avatar" />
                         <div className="text-sm font-normal text-gray-500">
-                          <div className="text-base font-semibold text-gray-900">{user.name}</div>
-                          <div className="text-sm font-normal text-gray-500">{user.email}</div>
+                          <div className="text-base font-semibold text-gray-100">{user.name}</div>
+                          <div className="text-sm font-normal text-gray-300">{user.email}</div>
                         </div>
                       </td>
 
                       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">
                         <div className="flex items-center">
-                          <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> Active
+                          <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>
+                          <span className="text-sm font-semibold text-gray-100">Active</span>
                         </div>
                       </td>
                       <td className="p-4 whitespace-nowrap space-x-2">
