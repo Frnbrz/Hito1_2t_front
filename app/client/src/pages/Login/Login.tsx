@@ -27,7 +27,7 @@ const FormSchema = z.object({
 
 type FormSchemaType = z.infer<typeof FormSchema>
 
-function SignIn() {
+function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -140,4 +140,4 @@ function SignIn() {
 }
 
 
-export default SignIn
+export default Login
