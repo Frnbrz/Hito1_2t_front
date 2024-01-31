@@ -28,21 +28,21 @@ function PostForm() {
 
   return (
     <form className="mb-6" onSubmit={handleSubmit} >
-      <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Añade Post</h2>
-      <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <label htmlFor="name" className="sr-only">Titulo</label>
+      <h2 className="text-lg lg:text-2xl font-bold  text-white">Añade Post</h2>
+      <div className="py-2 px-4 mb-4  rounded-lg rounded-t-lg border  bg-gray-800 border-gray-700">
+        <label htmlFor="name" className="sr-only border  bg-gray-800 border-gray-700">Titulo</label>
         <input id="name"
           type="text"
           name="name"
-          className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+          className="px-0 w-full text-sm  border-0 focus:ring-0 focus:outline-none text-white placeholder-gray-400 bg-gray-800"
           placeholder="Titulo" required
         ></input>
       </div>
-      <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+      <div className="py-2 px-4 mb-4  rounded-lg rounded-t-lg border  bg-gray-800 border-gray-700">
         <label htmlFor="comment" className="sr-only">Your comment</label>
         <textarea id="comment"
           name="text"
-          className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+          className="px-0 w-full text-sm border-0 focus:ring-0 focus:outline-none text-white placeholder-gray-400 bg-gray-800"
           placeholder="Escribe Post" required></textarea>
       </div>
 
