@@ -95,7 +95,7 @@ function PostItem() {
           <h2 className="mb-2 text-2xl font-bold tracking-tight text-white">
             {blogByIdState.name}
           </h2>
-          <p className="mb-5 font-light text-gray-500 dark:text-gray-400">{blogByIdState.text}</p>
+          <p className="mb-5 font-light  text-gray-300">{blogByIdState.text}</p>
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <img className="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
@@ -109,18 +109,18 @@ function PostItem() {
         <section className=" py-8 lg:py-16 antialiased" >
           <div className="max-w-2xl mx-auto px-4">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg lg:text-2xl font-bold text-white">Discussion (20)</h2>
+              <h2 className="text-lg lg:text-2xl font-bold text-white">Comentarios ({blogByIdState.comments?.length})</h2>
             </div>
             <form className="mb-6" onSubmit={handleSubmit}>
               <div className="py-2 px-4 mb-4 rounded-lg rounded-t-lg border border-gray-200 bg-gray-800 dark:border-gray-700">
                 <label htmlFor="comment" className="sr-only">Your comment</label>
                 <textarea id="comment"
                   name='comment'
-                  className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                  className="px-0 w-full text-sm  border-0 focus:ring-0 focus:outline-none text-white placeholder-gray-400 bg-gray-800"
                   placeholder="Write a comment..." required></textarea>
               </div>
               <DefaultButton>
-                Post comment
+                Añade un comentario
               </DefaultButton>
             </form>
             <div className="flex  gap-3 flex-col">
