@@ -1,12 +1,19 @@
-import { DecodedToken } from "@/models"
+import { DecodedToken, UserInfo } from "@/models"
 import { AppStore } from "@/redux/store"
 import { jwtDecode } from "jwt-decode"
 import { useSelector } from "react-redux"
 
 const useDecoded = () => {
+  let userState: UserInfo = { token: '', email: '' }
+  let token: string | null = null
+  try {
 
-  const userState = useSelector((store: AppStore) => store.user)
-  const token = userState.token
+    userState = useSelector((state: AppStore) => state.user)
+
+    token = userState.token
+  } catch (e) {
+    console.log(e)
+  }
   if (!token) return { role: '', email: '' }
   const { role, email }: DecodedToken = jwtDecode(token)
 
