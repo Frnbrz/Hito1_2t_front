@@ -16,7 +16,7 @@ import { UpdateBlogDto } from './dto/update-blog.dto'
 })
 @ApiTags('blog')
 @Controller('blog')
-@Roles(Role.USER)
+@Roles(Role.ADMIN)
 @UseGuards(AuthGuard, RolesGuard)
 export class BlogController {
   constructor(private readonly blogService: BlogService) { }
