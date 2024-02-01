@@ -16,12 +16,13 @@ import { UpdateBlogDto } from './dto/update-blog.dto'
 })
 @ApiTags('blog')
 @Controller('blog')
-@Roles(Role.ADMIN)
+@Roles(Role.USER)
 @UseGuards(AuthGuard, RolesGuard)
 export class BlogController {
   constructor(private readonly blogService: BlogService) { }
 
   @Post()
+  @Roles(Role.ADMIN)
   @ApiCreatedResponse({
     description: 'The record has been successfully created.',
   })
